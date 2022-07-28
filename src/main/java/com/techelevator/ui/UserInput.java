@@ -1,16 +1,29 @@
 package com.techelevator.ui;
 
+import com.techelevator.application.Purchase;
+
 import java.util.Scanner;
 
 /**
  * Responsibilities: This class should handle receiving ALL input from the User
- *
+ * <p>
  * Dependencies: None
  */
-public class UserInput {
+public class UserInput
+{
     private Scanner scanner = new Scanner(System.in);
 
-    public String getHomeScreenOption() {
+    private Purchase purchase;
+//    private Balance balance;
+
+
+    public UserInput()
+    {
+        this.purchase = new Purchase();
+    }
+
+    public String getHomeScreenOption()
+    {
         System.out.println("What would you like to do?");
         System.out.println();
 
@@ -24,16 +37,17 @@ public class UserInput {
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toLowerCase();
         System.out.println("option = " + option);
-        if (option.equals("d")) {
+        if (option.equals("d"))
+        {
             return "display";
-        }
-        else if (option.equals("p")) {
+        } else if (option.equals("p"))
+        {
             return "purchase";
-        }
-        else if (option.equals("e")) {
+        } else if (option.equals("e"))
+        {
             return "exit";
-        }
-        else {
+        } else
+        {
             return "";
         }
 
