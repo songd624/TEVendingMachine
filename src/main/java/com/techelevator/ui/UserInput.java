@@ -11,14 +11,14 @@ public class UserInput
 {
     private Scanner scanner = new Scanner(System.in);
 
-    private Purchase purchase;
+   // private Purchase purchase;
 //    private Balance balance;
 
 
-    public UserInput()
-    {
-        this.purchase = new Purchase();
-    }
+    //public UserInput()
+   // {
+    //    this.purchase = new Purchase();
+   // }
 
     public String getHomeScreenOption()
     {

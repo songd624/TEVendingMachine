@@ -10,16 +10,17 @@ public class FeedMoney {
     private Scanner scanner = new Scanner(System.in);
     private Balance balance;
     private Logger logger;
+    private double currentBalance;
 
     public FeedMoney () {
         this.balance = new Balance();
         this.logger = new Logger();
+        this.currentBalance = balance.currentBalance();;
     }
 
 
     public void feedMoney(){
-        double currentBalance = balance.getBalance();
-        BigDecimal currentBalanceBd = new BigDecimal(Double.toString(currentBalance));
+        BigDecimal currentBalanceBd = new BigDecimal(Double.toString(balance.getBalance()));
         BigDecimal currentBalanceBdRound = currentBalanceBd.setScale(2, RoundingMode.HALF_UP);
         System.out.println("Current Money Provided: " + "$" + currentBalanceBdRound);
         System.out.println("Please input how much money you would like add to your balance");
@@ -38,7 +39,12 @@ public class FeedMoney {
         } else {
             double choiceDouble = (Integer.parseInt(moneyChoice));
             balance.setBalance(currentBalance + choiceDouble);
-            BigDecimal balanceBd = new BigDecimal(Double.toString(balance.getBalance()));
+
+            System.out.println("balance.getBalance()");
+            System.out.println(balance.getBalance());
+            System.out.println("balance.currentBalance");
+            System.out.println(balance.currentBalance());
+            BigDecimal balanceBd = new BigDecimal(Double.toString(balance.currentBalance()));
             BigDecimal balanceBdRound = balanceBd.setScale(2, RoundingMode.HALF_UP);
             String moneyFedStr = String.format("%-15s", "MONEY FED: ");
             BigDecimal choiceDoubleBd = new BigDecimal((Double.toString(choiceDouble)));

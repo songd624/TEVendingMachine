@@ -1,19 +1,18 @@
 package com.techelevator.application;
 
-import java.math.BigDecimal;
-
 public class Balance {
     private double balance;
 
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void setBalance(double value) {
+        this.balance = value;
     }
 
-    public Balance() {
+    public double currentBalance() {
+        return getBalance();
     }
 
 }

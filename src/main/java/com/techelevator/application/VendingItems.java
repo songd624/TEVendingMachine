@@ -11,10 +11,10 @@ public class VendingItems {
 
 
     private Map<String, VendingItem> vendingItemsMap = new HashMap<>();
-    private List<VendingItem> itemList = new ArrayList<>();
+
 
     public void readFile() {
-        File cateringFile = new File("catering.csv");
+        File cateringFile = new File("catering1.csv");
 
         try {
             Scanner items = new Scanner(cateringFile);
@@ -47,7 +47,9 @@ public class VendingItems {
             String itemNameFormatted = String.format("%5s", itemName);
             BigDecimal itemPrice = item.getPrice();
             String itemPriceFormatted = String.format("%-5s", itemPrice);
-            System.out.println(slotFormatted + itemNameFormatted + itemPriceFormatted);
+            int stock = item.getStock();
+            System.out.printf("\n %-20s %-20s %s",
+                    slotFormatted, itemNameFormatted,  itemPriceFormatted);
 
 
         }

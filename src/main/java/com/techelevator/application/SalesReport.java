@@ -34,10 +34,10 @@ public void salesReport()
     // TODO: add in proper variables
         // TODO: may move total sales
 
-        String saleItemWithQuantity = itemPurchased + "|" + quantityPurchased;
-String Total
+       // String saleItemWithQuantity = itemPurchased + "|" + quantityPurchased;
+//String Total
 
-        this.writer.println(saleItemWithQuantity);
+ //       this.writer.println(saleItemWithQuantity);
         this.writer.println();
         this.writer.flush();
 
