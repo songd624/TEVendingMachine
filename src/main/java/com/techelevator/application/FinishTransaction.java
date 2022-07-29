@@ -1,5 +1,6 @@
 package com.techelevator.application;
 
+
 import java.util.Scanner;
 
 public class FinishTransaction
@@ -17,5 +18,21 @@ public class FinishTransaction
         this.currentBalance = currentBalance;
     }
 
+
+//    while(true)
+//    {
+//        System.out.println("Your total remaining balance is: " + currentBalance);
+//        System.out.println("Are you sure you would like to finish this transaction? [Y/N]");
+//        String userInput = scanner.nextLine();
+//        if(userInput.equalsIgnoreCase("Y"))
+//        {
+////        UserOutput.displayFinishTransaction(currentBalance);
+//        }
+//        else if(userInput.equalsIgnoreCase("N"))
+//        {
+//
+//        }
+//
+//    }
 
 }

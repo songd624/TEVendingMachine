@@ -30,7 +30,7 @@ public class VendingItems {
 
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("ERROR: File NOT Found...");;
         }
     }
 
@@ -50,7 +50,6 @@ public class VendingItems {
             int stock = item.getStock();
             System.out.printf("\n %-20s %-20s %-5s | %d",
                     slotFormatted, itemNameFormatted,  itemPriceFormatted, stock);
-
 
         }
 

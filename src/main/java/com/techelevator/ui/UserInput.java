@@ -37,13 +37,13 @@ public class UserInput
         System.out.println("option = " + option);
         if (option.equals("d"))
         {
-            return "display";
+            return "Displaying available items...";
         } else if (option.equals("p"))
         {
-            return "purchase";
+            return "Entering Purchase Menu...";
         } else if (option.equals("e"))
         {
-            return "exit";
+            return "Thank You for using the Taste Elevator© Vending Machine App \n Have a Great Day!";
         } else
         {
             return "";

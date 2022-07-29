@@ -24,15 +24,15 @@ public class VendingMachine {
             String choice = userInput.getHomeScreenOption();
 
             System.out.println(choice);
-            if(choice.equals("display")) {
+            if(choice.equals("Displaying available items...")) {
                 vendingItems.displayVendingItems();
                 // display the items
             }
-            else if(choice.equals("purchase")) {
+            else if(choice.equals("Entering Purchase Menu...")) {
                 purchaseScreen.purchaseMenu();
                 // make a purchase
             }
-            else if(choice.equals("exit")) {
+            else if(choice.equals("Thank You for using the Taste Elevator© Vending Machine App \n Have a Great Day!")) {
                 // good bye
                 break;
             }
