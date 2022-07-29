@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +23,8 @@ public class Logger {
             this.writer = new PrintWriter(new FileOutputStream(this.fileObj), true);
             writer.println();
         } catch (FileNotFoundException e) {
-            System.out.println("ERROR: Problem creating file...");
+            //TODO: remove this for final product
+            e.printStackTrace();
         }
     }
 

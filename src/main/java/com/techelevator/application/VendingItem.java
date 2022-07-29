@@ -10,7 +10,7 @@ public class VendingItem {
     private int stock;
 
     public int getStock() {
-        return stock;
+        return this.stock;
     }
 
     public void setStock(int stock) {
@@ -45,9 +45,6 @@ public class VendingItem {
         return itemType;
     }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
 
     public VendingItem(String slot, String itemName, BigDecimal price, String itemType) {
         this.slot = slot;
@@ -56,28 +53,6 @@ public class VendingItem {
         this.itemType = itemType;
         this.stock = 6;
 
-    }
-
-    public void updateQuantity()
-    {
-        this.stock -= 1;
-    }
-
-    public String purchaseMessage()
-    {
-        switch(this.itemType)
-        {
-            case "munchy":
-                return "Munchy, Munchy, so Good!";
-            case "candy":
-                return "Sugar, Sugar, so Sweet!";
-            case "drink":
-                return "Drinky, Drinky, Slurp Slurp!";
-            case "gum":
-                return "Chewy, Chewy, Lots O Bubbles!";
-            default:
-                return null;
-        }
     }
 
 }

@@ -10,6 +10,8 @@ public class VendingMachine {
     PurchaseScreen purchaseScreen;
     Logger logger;
 
+
+
     public VendingMachine() {
         this.logger = new Logger();
         this.purchaseScreen = new PurchaseScreen();
@@ -24,15 +26,15 @@ public class VendingMachine {
             String choice = userInput.getHomeScreenOption();
 
             System.out.println(choice);
-            if(choice.equals("Displaying available items...")) {
+            if(choice.equals("display")) {
                 vendingItems.displayVendingItems();
                 // display the items
             }
-            else if(choice.equals("Entering Purchase Menu...")) {
+            else if(choice.equals("purchase")) {
                 purchaseScreen.purchaseMenu();
                 // make a purchase
             }
-            else if(choice.equals("Thank You for using the Taste Elevator© Vending Machine App \n Have a Great Day!")) {
+            else if(choice.equals("exit")) {
                 // good bye
                 break;
             }

@@ -9,16 +9,18 @@ public class PurchaseScreen {
     private Balance balance;
     private Logger logger;
     private FeedMoney option;
-    private PurchaseItem purchaseItem;
     private VendingItems vendingItems;
+
 
     public PurchaseScreen () {
         this.balance = new Balance();
         this.logger = new Logger();
         this.option = new FeedMoney();
-        //this.purchaseItem = new PurchaseItem();  todo:fix this
         this.vendingItems = new VendingItems();
+
     }
+
+
 
     public void purchaseMenu() {
         System.out.println("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
@@ -45,8 +47,7 @@ public class PurchaseScreen {
             option.feedMoney();
         }
         if (choice.equalsIgnoreCase("s")) {
-            vendingItems.displayVendingItems();
-            purchaseItem.purchaseItem(balance.getBalance());
+            vendingItems.purchaseItem();
         }
 
 
