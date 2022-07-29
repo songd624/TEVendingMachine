@@ -58,4 +58,26 @@ public class VendingItem {
 
     }
 
+    public void updateQuantity()
+    {
+        this.stock -= 1;
+    }
+
+    public String purchaseMessage()
+    {
+        switch(this.itemType)
+        {
+            case "munchy":
+                return "Munchy, Munchy, so Good!";
+            case "candy":
+                return "Sugar, Sugar, so Sweet!";
+            case "drink":
+                return "Drinky, Drinky, Slurp Slurp!";
+            case "gum":
+                return "Chewy, Chewy, Lots O Bubbles!";
+            default:
+                return null;
+        }
+    }
+
 }

@@ -26,6 +26,7 @@ public class FeedMoney {
         System.out.println("Please input how much money you would like add to your balance");
         System.out.println("$1, $5, $10, or $20. Only enter the numerical value");
         System.out.println("Input menu to go back to the main menu");
+        // TODO call display method
 
         String moneyChoice = scanner.nextLine();
         while(!moneyChoice.equalsIgnoreCase("menu") && !moneyChoice.equals("1")

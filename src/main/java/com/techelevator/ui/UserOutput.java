@@ -26,7 +26,7 @@ public class UserOutput {
     }
 
 
-    public void displayPurchaseOptions(double currentBalance) {
+    public void getDisplayPurchaseOptions(double currentBalance) {
         System.out.println("Here are the options: ");
         System.out.println("(M) Feed Money");
         System.out.println("(S) Select Option");
@@ -42,10 +42,17 @@ public class UserOutput {
         System.out.println("Input menu to go back to the main menu");
     }
 
-    public void display()
-    {
-
-    }
+//    public void displayFinishTransaction(double currentBalance)
+//    {
+//        System.out.println("Are you sure you would like to finish this transaction? [Y/N]");
+//
+//        System.out.println("Your total remaining balance is: " + currentBalance);
+//        System.out.println("This transaction has completed and your change has been dispensed below...");
+//        System.out.println("$1 Bills: " +  + " Quarters: " +  + " Dimes: " + " Nickels: " + );
+//        System.out.println("Your balance is now: $0.00");
+//        System.out.println("Thank you!");
+//
+//    }
 
 
 }
