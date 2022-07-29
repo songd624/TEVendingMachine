@@ -14,6 +14,9 @@ public class PurchaseItem {
         System.out.println("Your current balance is: " + currentBalance);
         System.out.println("Please choose an option to purchase");
         System.out.println("Or input menu to go to the main menu.");
+
+
+
         Scanner vendingOption = new Scanner(System.in);
 
     }

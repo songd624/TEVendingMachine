@@ -42,5 +42,10 @@ public class UserOutput {
         System.out.println("Input menu to go back to the main menu");
     }
 
+    public void display()
+    {
+
+    }
+
 
 }

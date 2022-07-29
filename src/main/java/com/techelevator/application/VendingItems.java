@@ -48,8 +48,8 @@ public class VendingItems {
             BigDecimal itemPrice = item.getPrice();
             String itemPriceFormatted = String.format("%-5s", itemPrice);
             int stock = item.getStock();
-            System.out.printf("\n %-20s %-20s %s",
-                    slotFormatted, itemNameFormatted,  itemPriceFormatted);
+            System.out.printf("\n %-20s %-20s %-5s | %d",
+                    slotFormatted, itemNameFormatted,  itemPriceFormatted, stock);
 
 
         }
