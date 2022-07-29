@@ -1,7 +1,5 @@
 package com.techelevator.ui;
 
-import com.techelevator.application.Purchase;
-
 import java.util.Scanner;
 
 /**

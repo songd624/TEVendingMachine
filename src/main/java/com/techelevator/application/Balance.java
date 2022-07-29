@@ -1,7 +1,8 @@
 package com.techelevator.application;
 
-public class Balance
-{
+import java.math.BigDecimal;
+
+public class Balance {
     private double balance;
 
     public double getBalance() {
@@ -14,4 +15,5 @@ public class Balance
 
     public Balance() {
     }
+
 }

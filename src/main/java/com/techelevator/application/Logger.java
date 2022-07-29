@@ -1,5 +1,7 @@
 package com.techelevator.application;
 
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,8 +9,7 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Logger
-{
+public class Logger {
     private final String PATH = "src/main/resources";
     private final String AUDIT_LOG_FILENAME = "audit.txt";
     private File fileObj;
@@ -23,7 +24,7 @@ public class Logger
             writer.println();
         } catch (FileNotFoundException e) {
             //TODO: remove this for final product
-            System.out.println("ERROR: File creation not valid!");
+            e.printStackTrace();
         }
     }
 
@@ -32,12 +33,8 @@ public class Logger
         DateTimeFormatter currentFormatted = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
         String formattedDateAndTime = current.format(currentFormatted);
         String messageWithTimeStamp = formattedDateAndTime + " " + messageToLog;
-
         this.writer.println(messageWithTimeStamp);
         this.writer.flush();
-
-        // TODO: add selection number into audit.txt
-        // 1/01/2022 12:00:20 PM 7Down           B4 $10.00   $6.75
     }
 
     public void close() {
@@ -49,4 +46,5 @@ public class Logger
     public boolean isClosed() {
         return this.writer == null;
     }
+
 }
