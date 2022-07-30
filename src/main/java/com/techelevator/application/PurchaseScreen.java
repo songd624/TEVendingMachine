@@ -43,7 +43,10 @@ public class PurchaseScreen {
         while (!choice.equalsIgnoreCase("M") && !choice.equalsIgnoreCase("S")
                 && !choice.equalsIgnoreCase("F") &&
                 !choice.equalsIgnoreCase("menu")) {
-            System.out.println("Please input M/S/F or menu");
+            System.out.println("Please input '" + ANSI_GREEN + "M" + ANSI_RESET
+                    + "', '" + ANSI_GREEN + "S" + ANSI_RESET
+                    + "', '" + ANSI_GREEN + "F" + ANSI_RESET
+                    + "' or '" + ANSI_CYAN + "menu" + ANSI_RESET + "'");
             choice = scanner.nextLine();
         }
         if (choice.equalsIgnoreCase("menu")) {

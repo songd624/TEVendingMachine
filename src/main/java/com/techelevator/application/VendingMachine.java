@@ -22,7 +22,7 @@ public class VendingMachine {
         vendingItems.readFile();
         this.logger.write("========START LOG=======");
         while(true) {
-//            UserOutput.displayIntro();
+            UserOutput.displayIntro();
             UserOutput.displayHomeScreen();
             String choice = userInput.getHomeScreenOption();
 

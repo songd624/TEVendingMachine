@@ -15,13 +15,9 @@ public class VendingItems {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_LIGHT_YELLOW = "\u001B[93m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_GREEN = "\u001B[32m";
-
+    public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
 
 
     public void readFile() {
@@ -86,7 +82,14 @@ public class VendingItems {
     public void purchaseItem() {
         displayVendingItems();
         System.out.println();
-        System.out.println("Your current balance is: " + balance.getCurrentBalance());
+        if(balance.getCurrentBalance()== 0.00)
+        {
+            System.out.println("Your current balance is: " + ANSI_RED + balance.getCurrentBalance() + ANSI_RESET);
+        }
+        else
+        {
+            System.out.println("Your current balance is: " + ANSI_GREEN + balance.getCurrentBalance() + ANSI_RESET);
+        }
         System.out.println("Please choose an option to purchase");
         System.out.println("Or input menu to go to the main menu.");
         Scanner vendingOption = new Scanner(System.in);
