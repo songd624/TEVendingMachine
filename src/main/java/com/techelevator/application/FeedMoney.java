@@ -11,6 +11,13 @@ public class FeedMoney {
     private Balance balance;
     private Logger logger;
 
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_RED = "\u001B[31m";
+
+
     public FeedMoney () {
         this.balance = new Balance();
         this.logger = new Logger();
@@ -21,10 +28,24 @@ public class FeedMoney {
     public void feedMoney(){
         BigDecimal currentBalanceBd = new BigDecimal(Double.toString(balance.getCurrentBalance()));
         BigDecimal currentBalanceBdRound = currentBalanceBd.setScale(2, RoundingMode.HALF_UP);
-        System.out.println("Current Money Provided: " + "$" + currentBalanceBdRound);
-        System.out.println("Please input how much money you would like add to your balance");
-        System.out.println("$1, $5, $10, or $20. Only enter the numerical value");
-        System.out.println("Input menu to go back to the main menu");
+
+        if(currentBalanceBdRound.equals(new BigDecimal("0.00")))
+        {
+            System.out.println("        Current Money Provided: " + "$" + ANSI_RED + currentBalanceBdRound + ANSI_RESET);
+        }
+        else
+        {
+            System.out.println("        Current Money Provided: " + "$" + ANSI_GREEN + currentBalanceBdRound + ANSI_RESET);
+        }
+        System.out.println("   How much money you would like add to your balance...");
+        System.out.println("$1, $5, $10, or $20");
+        System.out.println( "Enter the numerical value (" + ANSI_GREEN + "1" + ANSI_RESET + "), ("
+                + ANSI_GREEN + "5" + ANSI_RESET + "), ("
+                + ANSI_GREEN + "10" + ANSI_RESET + "), or ("
+                + ANSI_GREEN + "20" + ANSI_RESET + ")");
+        System.out.println("        Enter " + "'" + ANSI_GREEN + "menu" + ANSI_RESET + "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
+
+
 
         String moneyChoice = scanner.nextLine();
         while(!moneyChoice.equalsIgnoreCase("menu") && !moneyChoice.equals("1")

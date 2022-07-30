@@ -11,6 +11,9 @@ public class UserInput
 {
     private Scanner scanner = new Scanner(System.in);
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+
    // private Purchase purchase;
 //    private Balance balance;
 
@@ -22,19 +25,19 @@ public class UserInput
 
     public String getHomeScreenOption()
     {
-        System.out.println("What would you like to do?");
+        System.out.println("                What would you like to do?");
         System.out.println();
 
-        System.out.println("D) Display Items");
-        System.out.println("P) Purchase");
-        System.out.println("E) Exit");
+        System.out.println("                   (" + ANSI_CYAN + "D" + ANSI_RESET + ") Display Items");
+        System.out.println("                     (" + ANSI_CYAN + "P" + ANSI_RESET + ") Purchase");
+        System.out.println("                     (" + ANSI_CYAN + "E" + ANSI_RESET + ") Exit App");
 
         System.out.println();
-        System.out.print("Please select an option: ");
+        System.out.print("                Please select an option: ");
 
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toLowerCase();
-        System.out.println("option = " + option);
+        System.out.println("Option Selected = " + option);
         if (option.equals("d"))
         {
             return "display";

@@ -13,6 +13,17 @@ public class VendingItems {
     private Balance balance = new Balance();
     private Map<String, VendingItem> vendingItemsMap = new HashMap<>();
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_LIGHT_YELLOW = "\u001B[93m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+
     public void readFile() {
         File cateringFile = new File("catering1.csv");
 
@@ -37,14 +48,24 @@ public class VendingItems {
     public void displayVendingItems() {
 
         System.out.println();
-        System.out.println("***************************************************");
-        System.out.println("              Vending Machine Inventory");
-        System.out.println("***************************************************");
+        System.out.println("**********************************************************");
+        System.out.println(ANSI_CYAN + "               Vending Machine Inventory" + ANSI_RESET);
+        System.out.println("**********************************************************");
+
+    System.out.println(ANSI_LIGHT_YELLOW + "----------------------------------------------------------");
+        System.out.println("|" + ANSI_RESET + " ID " + ANSI_LIGHT_YELLOW + "|            |"
+                + ANSI_RESET + " ITEM " + ANSI_LIGHT_YELLOW + "|               |"
+                + ANSI_RESET + " PRICE " + ANSI_LIGHT_YELLOW + "| |"
+                + ANSI_RESET + " Qty " + ANSI_LIGHT_YELLOW + "|");
+        System.out.println("----------------------------------------------------------" + ANSI_RESET);
+
+
         Set<String> keys = vendingItemsMap.keySet();
         List<String> keyList = new ArrayList<>(keys);
         Collections.sort(keyList);
         for (String key  : keyList) {
             VendingItem item = vendingItemsMap.get(key);
+
             String slot = item.getSlot();
             String slotFormatted = String.format("%-15s", slot);
             String itemName = item.getItemName();
@@ -52,11 +73,14 @@ public class VendingItems {
             BigDecimal itemPrice = item.getPrice();
             String itemPriceFormatted = String.format("%-5s", itemPrice);
             int stock = item.getStock();
-            System.out.printf("\n %-20s %-20s %s %-20d",
-                    slotFormatted, itemNameFormatted, itemPriceFormatted, stock);
 
+            System.out.printf("\n %-22s %-25s %-19s %-20d",
+                    ANSI_LIGHT_YELLOW + " " + slotFormatted + ANSI_RESET,
+                    itemNameFormatted,
+                    ANSI_GREEN + itemPriceFormatted + ANSI_RESET,
+                    stock);
         }
-
+        System.out.println(" ");
     }
 
     public void purchaseItem() {
