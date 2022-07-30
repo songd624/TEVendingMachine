@@ -11,12 +11,11 @@ public class PurchaseScreen {
     private FeedMoney option;
     private VendingItems vendingItems;
 
-
-    public PurchaseScreen () {
+    public PurchaseScreen (VendingItems input) {
         this.balance = new Balance();
         this.logger = new Logger();
         this.option = new FeedMoney();
-        this.vendingItems = new VendingItems();
+        this.vendingItems = input;
 
     }
 

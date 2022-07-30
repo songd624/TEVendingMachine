@@ -35,7 +35,7 @@ public class VendingItems {
     }
 
     public void displayVendingItems() {
-        readFile();
+
         System.out.println();
         System.out.println("***************************************************");
         System.out.println("              Vending Machine Inventory");
@@ -101,7 +101,7 @@ public class VendingItems {
 
             //todo: format this:
             System.out.println(name + "  " + price + "  " + message);
-
+            purchaseItem();
         }
     }
 

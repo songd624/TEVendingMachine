@@ -13,13 +13,13 @@ public class VendingMachine {
 
 
     public VendingMachine() {
-        this.logger = new Logger();
-        this.purchaseScreen = new PurchaseScreen();
         this.vendingItems = new VendingItems();
-        vendingItems.readFile();
+        this.logger = new Logger();
+        this.purchaseScreen = new PurchaseScreen(vendingItems);
     }
 
     public void run() {
+        vendingItems.readFile();
         this.logger.write("========START LOG=======");
         while(true) {
             UserOutput.displayHomeScreen();
