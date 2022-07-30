@@ -36,6 +36,7 @@ public class VendingMachine {
                 // make a purchase
             }
             else if(choice.equals("exit")) {
+                userOutput.exitDisplay();
                 // good bye
                 break;
             }

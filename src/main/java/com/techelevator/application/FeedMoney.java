@@ -36,16 +36,20 @@ public class FeedMoney {
         }
         else
         {
-            System.out.println("        Current Money Provided: " + "$" +
+            System.out.println("            Current Money Provided: " + "$" +
                     ANSI_GREEN + currentBalanceBdRound + ANSI_RESET);
         }
+
         System.out.println("   How much money you would like add to your balance...");
-        System.out.println("$1, $5, $10, or $20");
+        System.out.println("                  " + ANSI_GREEN + "$1" + ANSI_RESET
+                                            + ", " + ANSI_GREEN + "$5" + ANSI_RESET
+                                            + ", " + ANSI_GREEN + "$10" + ANSI_RESET
+                                            + ", or "  + ANSI_GREEN + "$20" + ANSI_RESET );
         System.out.println( "Enter the numerical value (" + ANSI_GREEN + "1" + ANSI_RESET + "), ("
                 + ANSI_GREEN + "5" + ANSI_RESET + "), ("
                 + ANSI_GREEN + "10" + ANSI_RESET + "), or ("
                 + ANSI_GREEN + "20" + ANSI_RESET + ")");
-        System.out.println("        Enter " + "'" + ANSI_GREEN + "menu" + ANSI_RESET +
+        System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
                 "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
 
 
@@ -54,7 +58,11 @@ public class FeedMoney {
         while(!moneyChoice.equalsIgnoreCase("menu") && !moneyChoice.equals("1")
                 && !moneyChoice.equals("5") && !moneyChoice.equals("10")
                 && !moneyChoice.equals("20")) {
-            System.out.println("Please input 1, 5, 10, 20, or menu");
+            System.out.println("Please input (" + ANSI_GREEN + "1" + ANSI_RESET
+                    + "), (" + ANSI_GREEN + "5" + ANSI_RESET
+                    + "), (" + ANSI_GREEN + "10" + ANSI_RESET + "), ("
+                    + ANSI_GREEN + "20" + ANSI_RESET + ")), or '"
+                    + ANSI_CYAN + "menu" + ANSI_RESET +"'");
             moneyChoice = scanner.nextLine();
         }
         if (moneyChoice.equalsIgnoreCase("menu")) {

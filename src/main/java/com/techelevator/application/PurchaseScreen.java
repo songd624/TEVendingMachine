@@ -17,6 +17,8 @@ public class PurchaseScreen {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_CYAN = "\u001B[36m";
 
+
+
     public PurchaseScreen (VendingItems input) {
         this.balance = new Balance();
         this.logger = new Logger();
@@ -36,15 +38,21 @@ public class PurchaseScreen {
         System.out.println("                     (" + ANSI_GREEN + "M" + ANSI_RESET + ") Feed Money");
         System.out.println("                    (" + ANSI_GREEN + "S" + ANSI_RESET + ") Select Option");
         System.out.println("                  (" + ANSI_GREEN + "F" + ANSI_RESET + ") Finish Transaction");
-        System.out.println("                Please input '" + ANSI_GREEN + "M" + ANSI_RESET + "','" + ANSI_GREEN + "S" + ANSI_RESET + "', or '" + ANSI_GREEN + "F" + ANSI_RESET + "'");
-        System.out.println("            Enter " + "'" + ANSI_GREEN + "menu" + ANSI_RESET + "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
+        System.out.println("                Please input '" + ANSI_GREEN + "M" + ANSI_RESET
+                                        + "','" + ANSI_GREEN + "S" + ANSI_RESET
+                                        + "', or '" + ANSI_GREEN + "F" + ANSI_RESET + "'");
+        System.out.println("            Enter " + "'" + ANSI_CYAN + "menu" + ANSI_RESET + "' to return to the "
+                                        + ANSI_CYAN + "Main Menu" + ANSI_RESET);
         System.out.println();
         System.out.println(ANSI_GREEN + "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~" + ANSI_RESET);
         String choice = scanner.nextLine();
         while (!choice.equalsIgnoreCase("M") && !choice.equalsIgnoreCase("S")
                 && !choice.equalsIgnoreCase("F") &&
                 !choice.equalsIgnoreCase("menu")) {
-            System.out.println("Please input M/S/F or menu");
+            System.out.println("Please input '" + ANSI_CYAN + "M" + ANSI_RESET
+                    + "', '" + ANSI_CYAN + "S" + ANSI_RESET
+                    + "', '" + ANSI_CYAN + "F" + ANSI_RESET
+                    + "' or '" + ANSI_CYAN + "menu" + ANSI_RESET + "'");
             choice = scanner.nextLine();
         }
         if (choice.equalsIgnoreCase("menu")) {
