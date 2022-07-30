@@ -10,6 +10,7 @@ public class PurchaseScreen {
     private Logger logger;
     private FeedMoney option;
     private VendingItems vendingItems;
+    private FinishTransaction finishTransaction;
 
     public static final String ANSI_RESET = "\u001B[0m";
 
@@ -21,7 +22,7 @@ public class PurchaseScreen {
         this.logger = new Logger();
         this.option = new FeedMoney();
         this.vendingItems = input;
-
+        this.finishTransaction = new FinishTransaction();
     }
 
 
@@ -43,10 +44,7 @@ public class PurchaseScreen {
         while (!choice.equalsIgnoreCase("M") && !choice.equalsIgnoreCase("S")
                 && !choice.equalsIgnoreCase("F") &&
                 !choice.equalsIgnoreCase("menu")) {
-            System.out.println("Please input '" + ANSI_GREEN + "M" + ANSI_RESET
-                    + "', '" + ANSI_GREEN + "S" + ANSI_RESET
-                    + "', '" + ANSI_GREEN + "F" + ANSI_RESET
-                    + "' or '" + ANSI_CYAN + "menu" + ANSI_RESET + "'");
+            System.out.println("Please input M/S/F or menu");
             choice = scanner.nextLine();
         }
         if (choice.equalsIgnoreCase("menu")) {
@@ -57,6 +55,9 @@ public class PurchaseScreen {
         }
         if (choice.equalsIgnoreCase("s")) {
             vendingItems.purchaseItem();
+        }
+        if (choice.equalsIgnoreCase("f")) {
+            finishTransaction.completeTransaction();
         }
 
 
