@@ -11,7 +11,7 @@ import java.util.*;
 public class VendingItems {
 
     private Balance balance = new Balance();
-    private Map<String, VendingItem> vendingItemsMap = new HashMap<>();
+    private static Map<String, VendingItem> vendingItemsMap = new HashMap<>();
     private FinishTransaction finishTransaction = new FinishTransaction();
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -45,7 +45,7 @@ public class VendingItems {
         }
     }
 
-    public void displayVendingItems() {
+    public static void displayVendingItems() {
 
         System.out.println();
         System.out.println("**********************************************************");

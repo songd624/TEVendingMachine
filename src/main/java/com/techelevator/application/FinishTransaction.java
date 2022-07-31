@@ -3,12 +3,14 @@ package com.techelevator.application;
 
 import com.techelevator.ui.UserOutput;
 
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class FinishTransaction
 {
+
     private Scanner scanner = new Scanner(System.in);
     private Balance balance;
     private Logger logger;
@@ -74,6 +76,7 @@ public class FinishTransaction
     }
 
     public void returnChange(int change) {
+
         int dollars = 0;
         int quarters = 0;
         int nickels = 0;
@@ -104,13 +107,23 @@ public class FinishTransaction
             pennies = remainingPennies;
 
         }
-        System.out.println("     Your change is as follows: " +
+        String outputString = "     Your change is as follows: " +
                 ANSI_PURPLE + dollars + ANSI_RESET + " dollars, " +
                 ANSI_LIGHT_YELLOW + quarters + ANSI_RESET + " quarters, " +
                 ANSI_BLUE + dimes + ANSI_RESET + " dimes, " +
                 ANSI_GREEN + nickels + ANSI_RESET + " nickels, and  " +
-                ANSI_CYAN + pennies + ANSI_RESET + " pennies.");
+                ANSI_CYAN + pennies + ANSI_RESET + " pennies.";
+        System.out.println(outputString);
+
+//        System.out.println("     Your change is as follows: " +
+//                ANSI_PURPLE + dollars + ANSI_RESET + " dollars, " +
+//                ANSI_LIGHT_YELLOW + quarters + ANSI_RESET + " quarters, " +
+//                ANSI_BLUE + dimes + ANSI_RESET + " dimes, " +
+//                ANSI_GREEN + nickels + ANSI_RESET + " nickels, and  " +
+//                ANSI_CYAN + pennies + ANSI_RESET + " pennies.");
+//        return outputString;
     }
+
 
 
 //    while(true)
