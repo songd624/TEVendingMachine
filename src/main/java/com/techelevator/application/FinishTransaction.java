@@ -15,6 +15,14 @@ public class FinishTransaction
     private double currentBalance;
     private UserOutput userOutput = new UserOutput();
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_LIGHT_YELLOW = "\u001B[93m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
+
     public FinishTransaction()
     {
         this.balance = new Balance();
@@ -26,7 +34,18 @@ public class FinishTransaction
         currentBalance = balance.getCurrentBalance();
         BigDecimal currentBalanceBd = new BigDecimal(Double.toString(currentBalance));
         currentBalanceBd = currentBalanceBd.setScale(2, RoundingMode.HALF_UP);
-        System.out.println("Your total remaining balance is: " + currentBalanceBd);
+
+        if(currentBalanceBd.equals(new BigDecimal("0.00")))
+        {
+            System.out.println("        Your total remaining balance is: " + "$" +
+                    ANSI_RED + currentBalanceBd + ANSI_RESET);
+        }
+        else
+        {
+            System.out.println("        Your total remaining balance is: " + "$" +
+                    ANSI_GREEN + currentBalanceBd + ANSI_RESET);
+        }
+
         System.out.println("Are you sure you would like to finish this transaction? [Y/N]");
         String userInput = scanner.nextLine();
         if(userInput.equalsIgnoreCase("Y"))
@@ -41,7 +60,7 @@ public class FinishTransaction
             Logger.write(loggerWrite);
 
             //give the user their change
-            System.out.println("Here is your change: ");
+            System.out.println("                                   Here is your change: ");
             String balanceStringBd1 = balanceStringBd.toString();
             double currentChange = Double.parseDouble(balanceStringBd1);
             int currentChange100 = (int)(currentChange * 100);
@@ -85,10 +104,12 @@ public class FinishTransaction
             pennies = remainingPennies;
 
         }
-        System.out.println("Your change is as follows: " +
-                dollars + " dollars, " + quarters + " quarters, "
-                + dimes + " dimes, " + nickels + " nickels, and  " + pennies
-                + " pennies.");
+        System.out.println("     Your change is as follows: " +
+                ANSI_PURPLE + dollars + ANSI_RESET + " dollars, " +
+                ANSI_LIGHT_YELLOW + quarters + ANSI_RESET + " quarters, " +
+                ANSI_BLUE + dimes + ANSI_RESET + " dimes, " +
+                ANSI_GREEN + nickels + ANSI_RESET + " nickels, and  " +
+                ANSI_CYAN + pennies + ANSI_RESET + " pennies.");
     }
 
 

@@ -17,6 +17,8 @@ public class FeedMoney {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+
 
 
     public FeedMoney () {
@@ -32,7 +34,7 @@ public class FeedMoney {
 
         if(currentBalanceBdRound.equals(new BigDecimal("0.00")))
         {
-            System.out.println("        Current Money Provided: " + "$" +
+            System.out.println("              Current Money Provided: " + "$" +
                     ANSI_RED + currentBalanceBdRound + ANSI_RESET);
         }
         else
@@ -41,19 +43,22 @@ public class FeedMoney {
                     ANSI_GREEN + currentBalanceBdRound + ANSI_RESET);
         }
 
-        System.out.println("   How much money would you like add to your balance...");
+        System.out.println("   How much money you would like add to your balance...");
         System.out.println("                  " + ANSI_GREEN + "$1" + ANSI_RESET
-                                            + ", " + ANSI_GREEN + "$5" + ANSI_RESET
-                                            + ", " + ANSI_GREEN + "$10" + ANSI_RESET
-                                            + ", or "  + ANSI_GREEN + "$20" + ANSI_RESET );
-        System.out.println( "Enter the numerical value (" + ANSI_GREEN + "1" + ANSI_RESET + "), ("
+                                                + ", " + ANSI_GREEN + "$5" + ANSI_RESET
+                                                + ", " + ANSI_GREEN + "$10" + ANSI_RESET
+                                                + ", or "  + ANSI_GREEN + "$20" + ANSI_RESET );
+        System.out.println( "     Enter the numerical value (" + ANSI_GREEN + "1" + ANSI_RESET + "), ("
                 + ANSI_GREEN + "5" + ANSI_RESET + "), ("
                 + ANSI_GREEN + "10" + ANSI_RESET + "), or ("
                 + ANSI_GREEN + "20" + ANSI_RESET + ")");
+
+        System.out.println("        Enter '" + ANSI_CYAN + "S" + ANSI_RESET +
+                "' to go to the " + ANSI_BLUE + "Selection Menu" + ANSI_RESET);
+
         System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
                 "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
-        System.out.println("        Enter '" + ANSI_CYAN + "(S)" + ANSI_RESET +
-                "' to go " + ANSI_CYAN + "select an item" + ANSI_RESET);
+
 
 
 

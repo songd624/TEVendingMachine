@@ -14,6 +14,8 @@ public class Logger {
     private final String AUDIT_LOG_FILENAME = "audit.txt";
     private File fileObj;
     private static PrintWriter writer;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
 
     public Logger() {
         fileObj = new File(PATH, AUDIT_LOG_FILENAME);
@@ -23,8 +25,7 @@ public class Logger {
             this.writer = new PrintWriter(new FileOutputStream(this.fileObj), true);
             writer.println();
         } catch (FileNotFoundException e) {
-            //TODO: remove this for final product
-            e.printStackTrace();
+            System.out.println(ANSI_RED + "Error: File NOT Found Exception" + ANSI_RESET);
         }
     }
 

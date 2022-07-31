@@ -5,7 +5,7 @@ import com.techelevator.ui.UserOutput;
 
 public class VendingMachine {
     UserInput userInput = new UserInput();
-    UserOutput userOutput = new UserOutput();
+//    UserOutput userOutput = new UserOutput();
     VendingItems vendingItems;
     PurchaseScreen purchaseScreen;
     Logger logger;

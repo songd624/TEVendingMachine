@@ -41,7 +41,7 @@ public class VendingItems {
 
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(ANSI_RED + "Error: File NOT Found Exception" + ANSI_RESET);
         }
     }
 
@@ -151,10 +151,11 @@ public class VendingItems {
 
 
             System.out.println("     Please input the items' " + ANSI_LIGHT_YELLOW + "ID" + ANSI_RESET + " code to purchase...");
+            System.out.println("       Input '" + ANSI_BLUE + "F" + ANSI_RESET +
+                    "' to finish your transaction." + ANSI_RESET);
             System.out.println("       Input '" + ANSI_CYAN + "menu" + ANSI_RESET +
                     "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
-            System.out.println("       Input '" + ANSI_CYAN + "(F)" + ANSI_RESET +
-                    "' to finish your transaction." + ANSI_RESET);
+
         } else {
             System.out.println("           Your current balance is: $" +
                     ANSI_RED + getCurrentBalanceBd + ANSI_RESET);

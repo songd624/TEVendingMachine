@@ -79,6 +79,7 @@ public class UserOutput {
                 "                                                         \\/__/     \n"
                 + ANSI_RESET);
         System.out.println();
+        System.exit(0);
     }
 
 //    public void displayPurchaseOptions(double currentBalance) {

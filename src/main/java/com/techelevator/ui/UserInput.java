@@ -14,14 +14,6 @@ public class UserInput
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_CYAN = "\u001B[36m";
 
-   // private Purchase purchase;
-//    private Balance balance;
-
-
-    //public UserInput()
-   // {
-    //    this.purchase = new Purchase();
-   // }
 
     public String getHomeScreenOption()
     {
