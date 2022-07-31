@@ -10,6 +10,7 @@ public class FeedMoney {
     private Scanner scanner = new Scanner(System.in);
     private Balance balance;
     private Logger logger;
+    private VendingItems vendingItems = new VendingItems();
 
     public static final String ANSI_RESET = "\u001B[0m";
 
@@ -40,7 +41,7 @@ public class FeedMoney {
                     ANSI_GREEN + currentBalanceBdRound + ANSI_RESET);
         }
 
-        System.out.println("   How much money you would like add to your balance...");
+        System.out.println("   How much money would you like add to your balance...");
         System.out.println("                  " + ANSI_GREEN + "$1" + ANSI_RESET
                                             + ", " + ANSI_GREEN + "$5" + ANSI_RESET
                                             + ", " + ANSI_GREEN + "$10" + ANSI_RESET
@@ -51,24 +52,31 @@ public class FeedMoney {
                 + ANSI_GREEN + "20" + ANSI_RESET + ")");
         System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
                 "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
+        System.out.println("        Enter '" + ANSI_CYAN + "(S)" + ANSI_RESET +
+                "' to go " + ANSI_CYAN + "select an item" + ANSI_RESET);
 
 
 
         String moneyChoice = scanner.nextLine();
         while(!moneyChoice.equalsIgnoreCase("menu") && !moneyChoice.equals("1")
                 && !moneyChoice.equals("5") && !moneyChoice.equals("10")
-                && !moneyChoice.equals("20")) {
+                && !moneyChoice.equals("20") && !moneyChoice.equalsIgnoreCase("S")) {
             System.out.println("Please input (" + ANSI_GREEN + "1" + ANSI_RESET
                     + "), (" + ANSI_GREEN + "5" + ANSI_RESET
                     + "), (" + ANSI_GREEN + "10" + ANSI_RESET + "), ("
                     + ANSI_GREEN + "20" + ANSI_RESET + ")), or '"
-                    + ANSI_CYAN + "menu" + ANSI_RESET +"'");
+                    + ANSI_CYAN + "menu" + ANSI_RESET +"', or '"
+                    + ANSI_CYAN + "s" + ANSI_RESET +"'");
             moneyChoice = scanner.nextLine();
         }
         if (moneyChoice.equalsIgnoreCase("menu")) {
             balance.setCurrentBalance(balance.getCurrentBalance());
             UserOutput.displayHomeScreen();
-        } else {
+        } else if (moneyChoice.equalsIgnoreCase("s")) {
+            balance.setCurrentBalance(balance.getCurrentBalance());
+            vendingItems.purchaseItem();
+        }
+        else {
             double choiceDouble = (Integer.parseInt(moneyChoice));
             double addToBalance = balance.getCurrentBalance() + choiceDouble;
 
@@ -80,7 +88,7 @@ public class FeedMoney {
             BigDecimal choiceDoubleBdRound = choiceDoubleBd.setScale(2, RoundingMode.HALF_UP);
             String balanceBdRoundStr = String.format("%8s", balanceBdRound);
             String loggerWrite = moneyFedStr + choiceDoubleBdRound + balanceBdRoundStr;
-            this.logger.write(loggerWrite);
+            Logger.write(loggerWrite);
 
             feedMoney();
         }

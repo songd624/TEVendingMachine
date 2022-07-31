@@ -12,6 +12,7 @@ public class VendingItems {
 
     private Balance balance = new Balance();
     private Map<String, VendingItem> vendingItemsMap = new HashMap<>();
+    private FinishTransaction finishTransaction = new FinishTransaction();
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_LIGHT_YELLOW = "\u001B[93m";
@@ -91,48 +92,52 @@ public class VendingItems {
         //Check funds
         checkFunds(currentBalance);
 
-            Scanner vendingOption = new Scanner(System.in);
-            String userChoice = vendingOption.nextLine();
-            String userChoiceCaps = userChoice.toUpperCase();
+        Scanner vendingOption = new Scanner(System.in);
+        String userChoice = vendingOption.nextLine();
+        String userChoiceCaps = userChoice.toUpperCase();
 
-            while (!vendingItemsMap.containsKey(userChoiceCaps) && !userChoice.equalsIgnoreCase("menu")) {
-                System.out.println("  Please make a selection among the available items...");
-                userChoice = vendingOption.nextLine();
-                userChoiceCaps = userChoice.toUpperCase();
-            }
+        while (!vendingItemsMap.containsKey(userChoiceCaps) && !userChoice.equalsIgnoreCase("menu")
+                &&!userChoice.equalsIgnoreCase("f")) {
+            System.out.println("  Please make a selection among the available items...");
+            userChoice = vendingOption.nextLine();
+            userChoiceCaps = userChoice.toUpperCase();
+        }
+
 
         //check if user input is menu
         if (userChoiceCaps.equalsIgnoreCase("menu")) {
             UserOutput.displayHomeScreen();
         }
+        else if(userChoiceCaps.equalsIgnoreCase("F")) {
+            finishTransaction.completeTransaction();
+        }
         else {
 
-            //checkChoiceIfMenu(userChoiceCaps);
-
-
+            //if valid input get all info needed
             VendingItem item = vendingItemsMap.get(userChoiceCaps);
-
             int currentStock = item.getStock();
             double price = item.getPrice();
             String name = item.getItemName();
             String itemType = item.getItemType();
             String slot = item.getSlot();
 
-
             //check stock
-            checkStock(currentStock);
-
+            if (currentStock == 0) {
+                checkNoStock();
+            }
             //check if there's enough money to buy
-            checkEnoughFunds(currentBalance, price);
-
+            else if (currentBalance - price < 0) {
+                notEnoughFunds();
+            }
             //passed all checks, buy the item and log it!
+            else {
+                currentStock -= 1;
+                item.setStock(currentStock);
 
-            currentStock -= 1;
-            item.setStock(currentStock);
-
-            balance.setCurrentBalance(currentBalance - price);
-            //logger
-            purchaseLogger(slot, name, price, itemType, currentBalance);
+                balance.setCurrentBalance(currentBalance - price);
+                //logger
+                purchaseLogger(slot, name, price, itemType, currentBalance);
+            }
         }
     }
 
@@ -148,6 +153,8 @@ public class VendingItems {
             System.out.println("     Please input the items' " + ANSI_LIGHT_YELLOW + "ID" + ANSI_RESET + " code to purchase...");
             System.out.println("       Input '" + ANSI_CYAN + "menu" + ANSI_RESET +
                     "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
+            System.out.println("       Input '" + ANSI_CYAN + "(F)" + ANSI_RESET +
+                    "' to finish your transaction." + ANSI_RESET);
         } else {
             System.out.println("           Your current balance is: $" +
                     ANSI_RED + getCurrentBalanceBd + ANSI_RESET);
@@ -156,38 +163,23 @@ public class VendingItems {
         }
     }
 
-
-//    public void checkChoiceIfMenu(String input) {
-//        if (input.equalsIgnoreCase("menu")) {
-//            UserOutput.displayHomeScreen();
-//        }
-
-
-    public void checkStock(int stockNumber) {
-        if (stockNumber == 0) {
+    public void checkNoStock() {
             System.out.println(ANSI_RED + "        Sorry, this item is out of stock... " + ANSI_RESET);
             System.out.println("            Please choose another item...");
             System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
                     "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
 
             purchaseItem();
-        }
     }
 
-    public void checkEnoughFunds(double userBalance, double itemPrice) {
-        if (userBalance - itemPrice <= 0) {
+    public void notEnoughFunds() {
             System.out.println(ANSI_RED + "       Sorry, you do not have the necessary funds... " + ANSI_RESET);
-//                System.out.println("       If you would like add money enter '" + ANSI_GREEN + "feed" + ANSI_RESET + "'...");
+           //     System.out.println("       If you would like add money enter '" + ANSI_GREEN + "feed" + ANSI_RESET + "'...");
             System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
                     "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
             purchaseItem();
-        }
     }
 
-    public void purchasingItem(String itemName, String type) {
-
-
-    }
 
     public void purchaseLogger(String slotNumber, String itemName, double price, String type, double currentBalance) {
         String message = "";

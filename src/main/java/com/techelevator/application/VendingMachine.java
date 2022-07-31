@@ -9,6 +9,7 @@ public class VendingMachine {
     VendingItems vendingItems;
     PurchaseScreen purchaseScreen;
     Logger logger;
+    FinishTransaction finishTransaction = new FinishTransaction();
 
 
 
@@ -36,9 +37,8 @@ public class VendingMachine {
                 // make a purchase
             }
             else if(choice.equals("exit")) {
-                userOutput.exitDisplay();
+                finishTransaction.completeTransaction();
                 // good bye
-                break;
             }
         }
     }

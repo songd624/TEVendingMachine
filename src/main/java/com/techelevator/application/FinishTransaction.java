@@ -13,6 +13,7 @@ public class FinishTransaction
     private Balance balance;
     private Logger logger;
     private double currentBalance;
+    private UserOutput userOutput = new UserOutput();
 
     public FinishTransaction()
     {
@@ -30,10 +31,6 @@ public class FinishTransaction
         String userInput = scanner.nextLine();
         if(userInput.equalsIgnoreCase("Y"))
         {
-            //give the user their change
-            System.out.println("Here is your change: ");
-            int currentChange = (int)(balance.getCurrentBalance() * 100);
-            returnChange(currentChange);
             //log onto audit
             String changeGiven = "CHANGE GIVEN :";
             String changeGivenFormatted = String.format("%-15s", changeGiven);
@@ -41,7 +38,15 @@ public class FinishTransaction
             BigDecimal balanceStringBd = new BigDecimal(balanceString);
             balanceStringBd = balanceStringBd.setScale(2, RoundingMode.HALF_UP);
             String loggerWrite = changeGivenFormatted + "$" + balanceStringBd + "   $0.00";
+            Logger.write(loggerWrite);
 
+            //give the user their change
+            System.out.println("Here is your change: ");
+            String balanceStringBd1 = balanceStringBd.toString();
+            double currentChange = Double.parseDouble(balanceStringBd1);
+            int currentChange100 = (int)(currentChange * 100);
+            returnChange(currentChange100);
+            userOutput.exitDisplay();
         }
         else if(userInput.equalsIgnoreCase("N"))
         {
@@ -64,22 +69,26 @@ public class FinishTransaction
             dollars = change / 100;
             remainingQtrs = change % 100;
             quarters = remainingQtrs / 25;
+            remainingDimes = remainingQtrs % 25;
+            dimes = remainingDimes / 10;
+            remainingNickels = remainingDimes % 10;
+            nickels = remainingNickels / 5;
+            remainingPennies = remainingNickels % 5;
+            pennies = remainingPennies;
         } else {
             quarters = change / 25;
+            remainingDimes = change % 25;
+            dimes = remainingDimes / 10;
+            remainingNickels = remainingDimes % 10;
+            nickels = remainingNickels / 5;
+            remainingPennies = remainingNickels % 5;
+            pennies = remainingPennies;
 
         }
-        remainingDimes = remainingQtrs % 25;
-        dimes = remainingDimes / 10;
-        remainingNickels = remainingDimes % 10;
-        nickels = remainingNickels / 5;
-        remainingPennies = remainingNickels % 5;
-        pennies = remainingPennies;
         System.out.println("Your change is as follows: " +
                 dollars + " dollars, " + quarters + " quarters, "
                 + dimes + " dimes, " + nickels + " nickels, and  " + pennies
                 + " pennies.");
-
-
     }
 
 
