@@ -3,6 +3,8 @@ package com.techelevator.application;
 
 import com.techelevator.ui.UserOutput;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class FinishTransaction
@@ -34,7 +36,9 @@ public class FinishTransaction
             String changeGiven = "CHANGE GIVEN :";
             String changeGivenFormatted = String.format("%-15s", changeGiven);
             String balanceString = Double.toString(currentBalance);
-            String loggerWrite = changeGivenFormatted + "$" + balanceString + "   $0.00";
+            BigDecimal balanceStringBd = new BigDecimal(balanceString);
+            balanceStringBd = balanceStringBd.setScale(2, RoundingMode.HALF_UP);
+            String loggerWrite = changeGivenFormatted + "$" + balanceStringBd + "   $0.00";
 
         }
         else if(userInput.equalsIgnoreCase("N"))

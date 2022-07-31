@@ -13,7 +13,7 @@ public class Logger {
     private final String PATH = "src/main/resources";
     private final String AUDIT_LOG_FILENAME = "audit.txt";
     private File fileObj;
-    private PrintWriter writer;
+    private static PrintWriter writer;
 
     public Logger() {
         fileObj = new File(PATH, AUDIT_LOG_FILENAME);
@@ -28,13 +28,13 @@ public class Logger {
         }
     }
 
-    public void write(String messageToLog) {
+    public static void write(String messageToLog) {
         LocalDateTime current = LocalDateTime.now();
         DateTimeFormatter currentFormatted = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
         String formattedDateAndTime = current.format(currentFormatted);
         String messageWithTimeStamp = formattedDateAndTime + " " + messageToLog;
-        this.writer.println(messageWithTimeStamp);
-        this.writer.flush();
+        writer.println(messageWithTimeStamp);
+        writer.flush();
     }
 
     public void close() {
