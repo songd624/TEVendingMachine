@@ -87,23 +87,10 @@ public class VendingItems {
 
         double currentBalance = balance.getCurrentBalance();
         System.out.println();
-        BigDecimal getCurrentBalanceBd = new BigDecimal(Double.toString(currentBalance));
-        getCurrentBalanceBd = getCurrentBalanceBd.setScale(2, RoundingMode.HALF_UP);
 
-        //If there are no funds
-        if (getCurrentBalanceBd.equals(new BigDecimal("0.00"))) {
-            System.out.println("           Your current balance is: $" +
-                    ANSI_RED + getCurrentBalanceBd + ANSI_RESET);
-            System.out.println("Please input menu and add money to your balance before purchasing.");
-            UserOutput.displayHomeScreen();
-        } else {
-            System.out.println("            Current Money Provided: " + "$" +
-                    ANSI_GREEN + getCurrentBalanceBd + ANSI_RESET);
+        //Check funds
+        checkFunds(currentBalance);
 
-
-            System.out.println("     Please input the items' " + ANSI_LIGHT_YELLOW + "ID" + ANSI_RESET + " code to purchase...");
-            System.out.println("       Input '" + ANSI_CYAN + "menu" + ANSI_RESET +
-                    "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
             Scanner vendingOption = new Scanner(System.in);
             String userChoice = vendingOption.nextLine();
             String userChoiceCaps = userChoice.toUpperCase();
@@ -114,74 +101,126 @@ public class VendingItems {
                 userChoiceCaps = userChoice.toUpperCase();
             }
 
-            if (userChoice.equalsIgnoreCase("menu")) {
-                UserOutput.displayHomeScreen();
-            } else {
-                VendingItem item = vendingItemsMap.get(userChoiceCaps);
-                int currentStock = item.getStock();
-                double price = item.getPrice();
+        //check if user input is menu
+        if (userChoiceCaps.equalsIgnoreCase("menu")) {
+            UserOutput.displayHomeScreen();
+        }
+        else {
 
-                //if item is sold out
-                if (currentStock == 0) {
-                    System.out.println(ANSI_RED + "        Sorry, this item is out of stock... " + ANSI_RESET);
-                    System.out.println("            Please choose another item...");
-                    System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
-                            "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
-                    purchaseItem();
-                }
-
-                //if there is not enough money for the item selected
-                if (currentBalance - price <= 0) {
-                    System.out.println(ANSI_RED + "       Sorry, you do not have the necessary funds... " + ANSI_RESET);
-//                System.out.println("       If you would like add money enter '" + ANSI_GREEN + "feed" + ANSI_RESET + "'...");
-                    System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
-                            "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
-                    purchaseItem();
-                }
-                //buying the item with enough funds
-                if (currentStock > 0 && currentBalance >= price) {
-                    //Get attributes to print out if purchase
-                    String name = item.getItemName();
-                    String itemType = item.getItemType();
-                    String message = "";
-                    if (itemType.equalsIgnoreCase("Munchy")) {
-                        message = ANSI_BLUE + "Munchy, Munchy, so Good!" + ANSI_RESET;
-                    } else if (itemType.equalsIgnoreCase("candy")) {
-                        message = ANSI_LIGHT_YELLOW + "Sugar, Sugar, so Sweet!" + ANSI_RESET;
-                    } else if (itemType.equalsIgnoreCase("drink")) {
-                        message = ANSI_RED + "Drinky, Drinky, Slurp Slurp!" + ANSI_RESET;
-                    } else {
-                        message = ANSI_PURPLE + "Chewy, Chewy, Lots O Bubbles!" + ANSI_RESET;
-                    }
-                    currentStock -= 1;
-                    item.setStock(currentStock);
+            //checkChoiceIfMenu(userChoiceCaps);
 
 
-                    //logger
-                    String nameFormatted = String.format("%-15s", name);
-                    String slot = item.getSlot();
-                    String slotFormatted = String.format("%-5s", slot);
-                    BigDecimal currentBalanceBd = new BigDecimal(currentBalance);
-                    currentBalanceBd = currentBalanceBd.setScale(2, RoundingMode.HALF_UP);
+            VendingItem item = vendingItemsMap.get(userChoiceCaps);
 
-                    double newBalance = currentBalance - price;
-                    BigDecimal newBalanceBd = new BigDecimal(Double.toString(newBalance));
-                    newBalanceBd = newBalanceBd.setScale(2, RoundingMode.HALF_UP);
-                    String newBalanceStrFormatted = String.format("%8s", newBalanceBd);
-                    String loggerWrite = nameFormatted + slotFormatted + currentBalanceBd + newBalanceStrFormatted;
-                    Logger.write(loggerWrite);
+            int currentStock = item.getStock();
+            double price = item.getPrice();
+            String name = item.getItemName();
+            String itemType = item.getItemType();
+            String slot = item.getSlot();
 
-                    balance.setCurrentBalance(currentBalance - price);
-                    //todo: format this:
-                    System.out.println(name + "  " + "$" + price + "  " + message);
 
-                    //once sale is complete, go back to purchase item screen
-                    purchaseItem();
-                }
-            }
+            //check stock
+            checkStock(currentStock);
+
+            //check if there's enough money to buy
+            checkEnoughFunds(currentBalance, price);
+
+            //passed all checks, buy the item and log it!
+
+            currentStock -= 1;
+            item.setStock(currentStock);
+
+            balance.setCurrentBalance(currentBalance - price);
+            //logger
+            purchaseLogger(slot, name, price, itemType, currentBalance);
         }
     }
 
+
+    public void checkFunds(double currentBalance) {
+        BigDecimal getCurrentBalanceBd = new BigDecimal(Double.toString(currentBalance));
+        getCurrentBalanceBd = getCurrentBalanceBd.setScale(2, RoundingMode.HALF_UP);
+        if (!getCurrentBalanceBd.equals(new BigDecimal("0.00"))) {
+            System.out.println("            Current Money Provided: " + "$" +
+                    ANSI_GREEN + getCurrentBalanceBd + ANSI_RESET);
+
+
+            System.out.println("     Please input the items' " + ANSI_LIGHT_YELLOW + "ID" + ANSI_RESET + " code to purchase...");
+            System.out.println("       Input '" + ANSI_CYAN + "menu" + ANSI_RESET +
+                    "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
+        } else {
+            System.out.println("           Your current balance is: $" +
+                    ANSI_RED + getCurrentBalanceBd + ANSI_RESET);
+            System.out.println("Please input menu and add money to your balance before purchasing.");
+            UserOutput.displayHomeScreen();
+        }
+    }
+
+
+//    public void checkChoiceIfMenu(String input) {
+//        if (input.equalsIgnoreCase("menu")) {
+//            UserOutput.displayHomeScreen();
+//        }
+
+
+    public void checkStock(int stockNumber) {
+        if (stockNumber == 0) {
+            System.out.println(ANSI_RED + "        Sorry, this item is out of stock... " + ANSI_RESET);
+            System.out.println("            Please choose another item...");
+            System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
+                    "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
+
+            purchaseItem();
+        }
+    }
+
+    public void checkEnoughFunds(double userBalance, double itemPrice) {
+        if (userBalance - itemPrice <= 0) {
+            System.out.println(ANSI_RED + "       Sorry, you do not have the necessary funds... " + ANSI_RESET);
+//                System.out.println("       If you would like add money enter '" + ANSI_GREEN + "feed" + ANSI_RESET + "'...");
+            System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
+                    "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
+            purchaseItem();
+        }
+    }
+
+    public void purchasingItem(String itemName, String type) {
+
+
+    }
+
+    public void purchaseLogger(String slotNumber, String itemName, double price, String type, double currentBalance) {
+        String message = "";
+        if (type.equalsIgnoreCase("Munchy")) {
+            message = ANSI_BLUE + "Munchy, Munchy, so Good!" + ANSI_RESET;
+        } else if (type.equalsIgnoreCase("candy")) {
+            message = ANSI_LIGHT_YELLOW + "Sugar, Sugar, so Sweet!" + ANSI_RESET;
+        } else if (type.equalsIgnoreCase("drink")) {
+            message = ANSI_RED + "Drinky, Drinky, Slurp Slurp!" + ANSI_RESET;
+        } else {
+            message = ANSI_PURPLE + "Chewy, Chewy, Lots O Bubbles!" + ANSI_RESET;
+        }
+
+        String nameFormatted = String.format("%-15s", itemName);
+
+        String slotFormatted = String.format("%-5s", slotNumber);
+        BigDecimal currentBalanceBd = new BigDecimal(currentBalance);
+        currentBalanceBd = currentBalanceBd.setScale(2, RoundingMode.HALF_UP);
+
+        double newBalance = currentBalance - price;
+        BigDecimal newBalanceBd = new BigDecimal(Double.toString(newBalance));
+        newBalanceBd = newBalanceBd.setScale(2, RoundingMode.HALF_UP);
+        String newBalanceStrFormatted = String.format("%8s", newBalanceBd);
+        String loggerWrite = nameFormatted + slotFormatted + currentBalanceBd + newBalanceStrFormatted;
+        Logger.write(loggerWrite);
+
+
+        //todo: format this:
+        System.out.println(itemName + "  " + "$" + price + "  " + message);
+
+        //once sale is complete, go back to purchase item screen
+        purchaseItem();
+    }
 }
 
 

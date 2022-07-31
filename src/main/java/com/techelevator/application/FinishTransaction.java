@@ -23,7 +23,9 @@ public class FinishTransaction
 
     public void completeTransaction() {
         currentBalance = balance.getCurrentBalance();
-        System.out.println("Your total remaining balance is: " + currentBalance);
+        BigDecimal currentBalanceBd = new BigDecimal(Double.toString(currentBalance));
+        currentBalanceBd = currentBalanceBd.setScale(2, RoundingMode.HALF_UP);
+        System.out.println("Your total remaining balance is: " + currentBalanceBd);
         System.out.println("Are you sure you would like to finish this transaction? [Y/N]");
         String userInput = scanner.nextLine();
         if(userInput.equalsIgnoreCase("Y"))
