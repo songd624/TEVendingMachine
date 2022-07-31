@@ -29,7 +29,8 @@ public class UserInput
 
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toLowerCase();
-        System.out.println("Option Selected = " + option);
+        System.out.println("                  Option Selected = " + option);
+        //TODO
         if (option.equals("d"))
         {
             return "display";

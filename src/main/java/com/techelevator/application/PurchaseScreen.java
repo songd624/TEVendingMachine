@@ -64,7 +64,7 @@ public class PurchaseScreen {
         if (choice.equalsIgnoreCase("s")) {
             vendingItems.purchaseItem();
         }
-        if (choice.equalsIgnoreCase("f")) {
+        if (choice.equalsIgnoreCase("f")) {     //TODO loading main menu
             finishTransaction.completeTransaction();
         }
 

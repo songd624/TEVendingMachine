@@ -108,10 +108,12 @@ public class VendingItems {
         if (userChoiceCaps.equalsIgnoreCase("menu")) {
             UserOutput.displayHomeScreen();
         }
-        else if(userChoiceCaps.equalsIgnoreCase("F")) {
+
+
+        else if(userChoiceCaps.equalsIgnoreCase("F")) {     //TODO loading main menu
             finishTransaction.completeTransaction();
         }
-        else {
+        else {          //TODO menu list NOT called when SELECT ITEM menu called from FEED MONEY menu
 
             //if valid input get all info needed
             VendingItem item = vendingItemsMap.get(userChoiceCaps);
@@ -159,8 +161,14 @@ public class VendingItems {
         } else {
             System.out.println("           Your current balance is: $" +
                     ANSI_RED + getCurrentBalanceBd + ANSI_RESET);
-            System.out.println("Please input menu and add money to your balance before purchasing.");
-            UserOutput.displayHomeScreen();
+
+            //TODO link to feedMoney, delete subsequent SysOut below once linked
+//            System.out.println("        Enter '" + ANSI_GREEN + "M" + ANSI_RESET +
+//                    "' to go to the " + ANSI_GREEN + "Feed Money " + ANSI_RESET + "menu...");
+//            System.out.println("Please input '" + ANSI_CYAN  + "menu" + ANSI_RESET + "' to return to the Main Menu...");
+
+
+            System.out.println("Please input '" + ANSI_CYAN  + "menu" + ANSI_RESET + "' and add money to your balance before purchasing...");
         }
     }
 
@@ -175,7 +183,10 @@ public class VendingItems {
 
     public void notEnoughFunds() {
             System.out.println(ANSI_RED + "       Sorry, you do not have the necessary funds... " + ANSI_RESET);
+
+            //TODO
            //     System.out.println("       If you would like add money enter '" + ANSI_GREEN + "feed" + ANSI_RESET + "'...");
+
             System.out.println("        Enter '" + ANSI_CYAN + "menu" + ANSI_RESET +
                     "' to return to the " + ANSI_CYAN + "Main Menu" + ANSI_RESET);
             purchaseItem();
