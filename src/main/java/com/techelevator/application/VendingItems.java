@@ -23,6 +23,10 @@ public class VendingItems {
     public static final String ANSI_CYAN = "\u001B[36m";
     private Logger logger = new Logger();
 
+    public Map<String, VendingItem> getVendingItemsMap()
+    {
+        return vendingItemsMap;
+    }
 
     public void readFile() {
         File cateringFile = new File("catering1.csv");
@@ -110,10 +114,10 @@ public class VendingItems {
         }
 
 
-        else if(userChoiceCaps.equalsIgnoreCase("F")) {     //TODO loading main menu
+        else if(userChoiceCaps.equalsIgnoreCase("F")) {
             finishTransaction.completeTransaction();
         }
-        else {          //TODO menu list NOT called when SELECT ITEM menu called from FEED MONEY menu
+        else {
 
             //if valid input get all info needed
             VendingItem item = vendingItemsMap.get(userChoiceCaps);
@@ -193,7 +197,10 @@ public class VendingItems {
     }
 
 
+
+
     public void purchaseLogger(String slotNumber, String itemName, double price, String type, double currentBalance) {
+
         String message = "";
         if (type.equalsIgnoreCase("Munchy")) {
             message = ANSI_BLUE + "Munchy, Munchy, so Good!" + ANSI_RESET;
@@ -208,13 +215,17 @@ public class VendingItems {
         String nameFormatted = String.format("%-15s", itemName);
 
         String slotFormatted = String.format("%-5s", slotNumber);
+
         BigDecimal currentBalanceBd = new BigDecimal(currentBalance);
         currentBalanceBd = currentBalanceBd.setScale(2, RoundingMode.HALF_UP);
 
         double newBalance = currentBalance - price;
+
         BigDecimal newBalanceBd = new BigDecimal(Double.toString(newBalance));
         newBalanceBd = newBalanceBd.setScale(2, RoundingMode.HALF_UP);
+
         String newBalanceStrFormatted = String.format("%8s", newBalanceBd);
+
         String loggerWrite = nameFormatted + slotFormatted + currentBalanceBd + newBalanceStrFormatted;
         Logger.write(loggerWrite);
 

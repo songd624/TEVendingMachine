@@ -66,7 +66,7 @@ public class FinishTransaction
             String balanceStringBd1 = balanceStringBd.toString();
             double currentChange = Double.parseDouble(balanceStringBd1);
             int currentChange100 = (int)(currentChange * 100);
-            returnChange(currentChange100);
+            System.out.println(returnChange(currentChange100));
             userOutput.exitDisplay();
         }
         else if(userInput.equalsIgnoreCase("N"))
@@ -75,7 +75,7 @@ public class FinishTransaction
         }
     }
 
-    public void returnChange(int change) {
+    public String returnChange(int change) { //TODO
 
         int dollars = 0;
         int quarters = 0;
@@ -107,13 +107,13 @@ public class FinishTransaction
             pennies = remainingPennies;
 
         }
-        String outputString = "     Your change is as follows: " +
+        return  "     Your change is as follows: " +
                 ANSI_PURPLE + dollars + ANSI_RESET + " dollars, " +
                 ANSI_LIGHT_YELLOW + quarters + ANSI_RESET + " quarters, " +
                 ANSI_BLUE + dimes + ANSI_RESET + " dimes, " +
                 ANSI_GREEN + nickels + ANSI_RESET + " nickels, and  " +
                 ANSI_CYAN + pennies + ANSI_RESET + " pennies.";
-        System.out.println(outputString);
+//        System.out.println(outputString);
 
 //        System.out.println("     Your change is as follows: " +
 //                ANSI_PURPLE + dollars + ANSI_RESET + " dollars, " +
